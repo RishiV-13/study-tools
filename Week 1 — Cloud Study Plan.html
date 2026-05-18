@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)file:///C:/Users/Rishi/Downloads/week1-cloud-plan.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 — Cloud Study Plan</title>
+<link rel="stylesheet" href="./Week 1 — Cloud Study Plan_files/tabler-icons.min.css">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f7f7f5;
+    --bg-tertiary: #f1efe8;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b6b6b;
+    --text-tertiary: #9b9b9b;
+    --border: rgba(0,0,0,0.12);
+    --border-md: rgba(0,0,0,0.2);
+    --blue-bg: #e6f1fb;
+    --blue-text: #185fa5;
+    --blue-border: #b5d4f4;
+    --blue-dark: #0c447c;
+    --green-bg: #eaf3de;
+    --green-text: #3b6d11;
+    --green-border: #c0dd97;
+    --amber-bg: #faeeda;
+    --amber-text: #854f0b;
+    --amber-border: #fac775;
+    --purple-bg: #eeedfe;
+    --purple-text: #534ab7;
+    --gray-bg: #f1efe8;
+    --gray-text: #5f5e5a;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-primary: #1f1f1e;
+      --bg-secondary: #2b2b29;
+      --bg-tertiary: #262624;
+      --text-primary: #ececec;
+      --text-secondary: #a8a8a8;
+      --text-tertiary: #6e6e6e;
+      --border: rgba(255,255,255,0.1);
+      --border-md: rgba(255,255,255,0.2);
+      --blue-bg: #0c2d4a;
+      --blue-text: #85b7eb;
+      --blue-border: #185fa5;
+      --blue-dark: #b5d4f4;
+      --green-bg: #173404;
+      --green-text: #97c459;
+      --green-border: #3b6d11;
+      --amber-bg: #412402;
+      --amber-text: #ef9f27;
+      --amber-border: #854f0b;
+      --purple-bg: #26215c;
+      --purple-text: #afa9ec;
+      --gray-bg: #2c2c2a;
+      --gray-text: #b4b2a9;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+  .page-title { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .page-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 1.5rem; }
+
+  /* Progress */
+  .prog-bar-wrap {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .prog-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .6rem; }
+  .prog-title { font-size: 14px; font-weight: 500; }
+  .prog-count { font-size: 13px; color: var(--text-secondary); }
+  .prog-track { height: 8px; background: var(--bg-secondary); border: 0.5px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .prog-fill { height: 100%; background: #378add; border-radius: 4px; transition: width .4s ease; }
+  .prog-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: .75rem; }
+  .ps { text-align: center; background: var(--bg-secondary); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: .4rem; }
+  .ps-val { font-size: 16px; font-weight: 500; }
+  .ps-lbl { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+
+  /* Tasks */
+  .task {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: .6rem;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .task.done { border-color: var(--green-border); }
+  .task.done .task-hdr { background: var(--green-bg); }
+  .task-hdr { display: flex; align-items: center; gap: .75rem; padding: .85rem 1rem; cursor: pointer; user-select: none; }
+  .task-hdr:hover { background: var(--bg-secondary); }
+  .task.done .task-hdr:hover { background: var(--green-bg); filter: brightness(0.97); }
+  .task-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--blue-bg); color: var(--blue-text);
+    font-size: 12px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .task.done .task-num { background: var(--green-bg); color: var(--green-text); }
+  .task-info { flex: 1; min-width: 0; }
+  .task-name { font-size: 14px; font-weight: 500; line-height: 1.3; }
+  .task-meta { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; }
+  .tbadge { font-size: 10px; padding: 2px 7px; border-radius: var(--radius-md); font-weight: 500; }
+  .tb-hrs { background: var(--blue-bg); color: var(--blue-text); }
+  .tb-setup { background: var(--gray-bg); color: var(--gray-text); }
+  .tb-learn { background: var(--purple-bg); color: var(--purple-text); }
+  .tb-hands { background: var(--amber-bg); color: var(--amber-text); }
+  .tb-review { background: var(--green-bg); color: var(--green-text); }
+  .task-right { display: flex; align-items: center; gap: .6rem; flex-shrink: 0; }
+  .chk {
+    width: 20px; height: 20px; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-md); background: var(--bg-primary);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--green-text); flex-shrink: 0; transition: all .15s;
+  }
+  .chk:hover { border-color: var(--green-border); background: var(--green-bg); }
+  .chk.checked { background: var(--green-bg); border-color: var(--green-border); }
+  .chevron { font-size: 14px; color: var(--text-tertiary); transition: transform .2s; }
+  .chevron.open { transform: rotate(180deg); }
+
+  /* Task body */
+  .task-body { display: none; border-top: 0.5px solid var(--border); padding: 1rem 1.25rem; }
+  .task-body.open { display: block; }
+  .section-lbl {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--text-tertiary);
+    margin-bottom: .5rem; margin-top: .85rem;
+  }
+  .section-lbl:first-child { margin-top: 0; }
+  .step { display: flex; gap: .65rem; margin-bottom: .55rem; align-items: flex-start; }
+  .snum {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--blue-bg); color: var(--blue-text);
+    font-size: 10px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .stxt { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+  .stxt strong { font-weight: 500; color: var(--text-primary); }
+  .stxt code { background: var(--bg-secondary); padding: 1px 5px; border-radius: 4px; font-size: 11px; font-family: 'SF Mono', 'Fira Code', monospace; }
+
+  .mastery { background: var(--amber-bg); border: 0.5px solid var(--amber-border); border-radius: var(--radius-md); padding: .65rem .85rem; margin-top: .75rem; }
+  .mastery-title { font-size: 11px; font-weight: 500; color: var(--amber-text); text-transform: uppercase; letter-spacing: .04em; margin-bottom: .4rem; display: flex; align-items: center; gap: 4px; }
+  .mastery ul { padding-left: 1rem; }
+  .mastery li { font-size: 12px; color: var(--amber-text); line-height: 1.6; }
+
+  .note { border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: .5rem .75rem; font-size: 12px; color: var(--text-secondary); margin-top: .6rem; line-height: 1.5; }
+  .note.warn { background: var(--amber-bg); border-left: 2.5px solid var(--amber-text); color: var(--amber-text); }
+  .note.green { background: var(--green-bg); border-left: 2.5px solid var(--green-text); color: var(--green-text); }
+  .note.info { background: var(--blue-bg); border-left: 2.5px solid var(--blue-text); color: var(--blue-text); }
+
+  @media (max-width: 600px) {
+    .prog-stats { grid-template-columns: repeat(2, 1fr); }
+    .task-name { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="page-title">Week 1 — Cloud Study Plan</div>
+  <div class="page-sub">30 hours · 9 tasks · Azure Fundamentals + Networking + First hands-on project</div>
+
+  <div class="prog-bar-wrap">
+    <div class="prog-meta">
+      <div class="prog-title">Week 1 progress</div>
+      <div class="prog-count" id="prog-text">0 / 30 hours completed</div>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="prog-stats">
+      <div class="ps"><div class="ps-val" id="stat-done">0</div><div class="ps-lbl">Tasks done</div></div>
+      <div class="ps"><div class="ps-val" id="stat-hrs">0h</div><div class="ps-lbl">Hours done</div></div>
+      <div class="ps"><div class="ps-val" id="stat-left">30h</div><div class="ps-lbl">Hours left</div></div>
+      <div class="ps"><div class="ps-val" id="stat-pct">0%</div><div class="ps-lbl">Complete</div></div>
+    </div>
+  </div>
+
+  <div id="tasks"><div class="task" id="task-1">
+      <div class="task-hdr" onclick="toggle(1)">
+        <div class="task-num">1</div>
+        <div class="task-info">
+          <div class="task-name">Set up all your accounts and tools</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>2h</span>
+            <span class="tbadge tb-setup">Setup</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,1)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-1"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-1">
+        
+      <div class="section-lbl">Create your GitHub account</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to <strong>github.com</strong> and click Sign Up. Use your real name or something professional as your username — this URL goes on your CV. E.g. <code>john-smith-cloud</code> or <code>jsmith-dev</code>.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Verify your email address. Then go to your profile and add a short bio — something like 'Studying cloud certifications. Working towards Azure Solutions Architect.'</div></div><div class="step"><div class="snum">3</div><div class="stxt">Go to <strong>skills.github.com</strong> and start the 'Introduction to GitHub' course. It takes about 45 minutes and teaches you everything you need to know about repos, commits, and READMEs. Do this before anything else on GitHub.</div></div>
+    
+      <div class="section-lbl">Create your Azure free account</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to <strong>azure.microsoft.com/free</strong> and click 'Start free'. Sign in with a Microsoft account (or create one). You'll need a credit card for identity verification — you will not be charged for free tier services.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Once inside, go to <strong>portal.azure.com</strong>. This is your main Azure workspace for the next 2 years. Spend 10 minutes clicking around every menu and icon — just get familiar with where things are.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Set up a billing alert immediately:</strong> search 'Cost Management' in the top search bar → Budgets → Add → set amount to £5, configure it to email you at 80% and 100% of that amount. This protects you from accidental charges.</div></div>
+    
+      <div class="section-lbl">Create your AWS free tier account</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to <strong>aws.amazon.com/free</strong> and sign up. A credit card is needed for verification only.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Once in, go to the top right, click your account name → Billing Dashboard → Budgets → Create a budget. Set a £5 monthly budget with email alerts. Then set your region to <strong>Europe (London) eu-west-2</strong>.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Spend 5 minutes clicking around the AWS Management Console. Note how different it feels from Azure — same concept, different layout.</div></div>
+    
+      <div class="section-lbl">Install your tools</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Download and install <strong>VS Code</strong> from code.visualstudio.com — your text editor for notes, README files, and later Terraform config.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Download and install <strong>GitHub Desktop</strong> from desktop.github.com — a visual app for uploading files to GitHub. Sign in with your GitHub account.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Bookmark <strong>diagrams.net</strong> (draw.io) — browser-based, nothing to install. You'll draw architecture diagrams here.</div></div><div class="step"><div class="snum">4</div><div class="stxt">Download <strong>Notion</strong> or <strong>Obsidian</strong> — use it as your study journal. Create a page called 'Cloud Study Notes — Week 1'.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>Can you explain what a GitHub repository is in your own words?</li><li>Have you set a billing alert on both Azure and AWS?</li><li>Do you know what the Azure Portal URL is from memory?</li></ul></div>
+        <div class="note warn">Do not skip the billing alerts. Students occasionally forget to delete a running VM and get charged. Two minutes now saves potential headaches later.</div>
+      </div>
+    </div><div class="task" id="task-2">
+      <div class="task-hdr" onclick="toggle(2)">
+        <div class="task-num">2</div>
+        <div class="task-info">
+          <div class="task-name">Understand what cloud computing actually is</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>3h</span>
+            <span class="tbadge tb-learn">Learn</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,2)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-2"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-2">
+        
+      <div class="section-lbl">Watch these three videos — in order, take notes on every one</div>
+      <div class="step"><div class="snum">1</div><div class="stxt"><strong>Video 1 (20 min):</strong> Search YouTube for <code>NetworkChuck what is cloud computing</code>. He uses relatable analogies and is very beginner-friendly. Pause whenever something is unclear and write it in your notes before continuing.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>Video 2 (35 min):</strong> Search YouTube for <code>John Savill AZ-900 episode 1 cloud computing</code>. He is the best Azure educator on the internet. Take structured notes under these headings: What is cloud, Why use it, Key terms.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Video 3 (8 min):</strong> Search YouTube for <code>IaaS PaaS SaaS explained simply</code> — watch the Fireship or Simplilearn version. This covers the three cloud service models that come up constantly in both the exam and job interviews.</div></div>
+    
+      <div class="section-lbl">Study these core concepts until you can explain each without notes</div>
+      <div class="step"><div class="snum">1</div><div class="stxt"><strong>What is a data centre?</strong> A massive building full of physical servers owned by Microsoft or Amazon. When you 'use the cloud', you are renting computers inside these buildings. Microsoft has data centres in London, Dublin, Amsterdam and many more.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>What is a region?</strong> A geographic area containing one or more data centres. 'UK South' is Azure's London region. Choosing UK South means your data lives in London — important for UK GDPR compliance.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>What is an availability zone?</strong> A separate building within a region. If one building has a power cut, the others stay up. Spreading resources across zones keeps them running — this is 'high availability'.</div></div><div class="step"><div class="snum">4</div><div class="stxt"><strong>IaaS:</strong> You rent raw hardware — VMs, storage, networks. You manage everything on top. Like renting an empty flat and furnishing it yourself.</div></div><div class="step"><div class="snum">5</div><div class="stxt"><strong>PaaS:</strong> You rent a managed platform to run your app on. Microsoft manages the infrastructure. Like renting a furnished flat.</div></div><div class="step"><div class="snum">6</div><div class="stxt"><strong>SaaS:</strong> You use software that lives entirely in the cloud. Microsoft 365 is SaaS. You manage nothing.</div></div><div class="step"><div class="snum">7</div><div class="stxt"><strong>CapEx vs OpEx:</strong> Before cloud, companies bought physical servers (big upfront cost = CapEx). Cloud is OpEx — pay monthly for what you use. This is why companies moved to cloud en masse.</div></div>
+    
+      <div class="section-lbl">Write a one-page summary in your notes app</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Write a plain-English summary of everything above as if explaining it to a friend who knows nothing about tech. This is the Feynman method — the most effective learning technique that exists.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Include your own definitions for: cloud, region, availability zone, IaaS, PaaS, SaaS, CapEx, OpEx. Use your own words, not copied definitions.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>Can you explain the difference between IaaS, PaaS and SaaS with a real-world analogy?</li><li>If a company says they want their data to stay in the UK for legal reasons, what Azure setting does that relate to?</li><li>Why did businesses move from buying physical servers to using cloud services?</li></ul></div>
+        <div class="note green">The Feynman summary is not optional. It is the single most effective study technique for retaining information. Every concept you struggle to explain needs more time before you move on.</div>
+      </div>
+    </div><div class="task" id="task-3">
+      <div class="task-hdr" onclick="toggle(3)">
+        <div class="task-num">3</div>
+        <div class="task-info">
+          <div class="task-name">Explore the Azure Portal in depth</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>2.5h</span>
+            <span class="tbadge tb-hands">Hands-on</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,3)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-3"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-3">
+        
+      <div class="section-lbl">Watch the Azure Portal orientation video</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Search YouTube for <code>Azure Portal tutorial beginner 2024</code>. Watch the Microsoft Azure official channel version (15–20 minutes). Follow along on your own portal as you watch — actually click the things they click.</div></div>
+    
+      <div class="section-lbl">Understand Azure's three-level structure</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Azure organises everything into three levels. You must understand all three — they appear constantly in AZ-104 and in real jobs.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>Level 1 — Subscription:</strong> Your billing account. Think of it like a bank account for Azure spending. Everything you create lives inside a subscription.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Level 2 — Resource Group:</strong> A container that groups related resources together — like a folder. Key rule: when you delete a resource group, everything inside gets deleted too. This is how you clean up after a project.</div></div><div class="step"><div class="snum">4</div><div class="stxt"><strong>Level 3 — Resource:</strong> The actual thing you created — a VM, a storage account, a network.</div></div><div class="step"><div class="snum">5</div><div class="stxt">In the Azure Portal, click 'Resource groups' → '+ Create'. Name it <code>rg-learning-week1</code>, choose 'UK South', click Create. You now have an empty resource group for your first project.</div></div>
+    
+      <div class="section-lbl">Explore every section of the portal</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">In the left sidebar, click each of these and spend 2 minutes reading: <strong>Virtual Machines, Storage accounts, Virtual networks, Azure Active Directory, Monitor, Cost Management.</strong> Don't create anything — just note what each service does.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Use the <strong>search bar at the top</strong> to search 'Virtual Machine'. This is the fastest navigation method — professionals use it constantly.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Click the <strong>question mark icon</strong> top right and explore the 'Quickstart Center' — it has structured beginner walkthroughs.</div></div><div class="step"><div class="snum">4</div><div class="stxt">Click <strong>Cloud Shell</strong> (terminal icon, top right). This is a browser-based command line connected directly to your Azure account. You won't need it yet, but know it's there.</div></div>
+    
+      <div class="section-lbl">Write portal notes</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Write down: what a subscription is, what a resource group is, what a resource is, and why the region 'UK South' matters specifically. Add a sketch of the three-level hierarchy.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>What is the difference between a resource group and a subscription?</li><li>If you want to delete every resource from a project at once, what is the fastest way to do it in Azure?</li><li>What region should you almost always choose for UK-based projects and why?</li></ul></div>
+        <div class="note green">You now have the resource group 'rg-learning-week1' in your Azure account. You will use this in Task 5 when you deploy your first VM.</div>
+      </div>
+    </div><div class="task" id="task-4">
+      <div class="task-hdr" onclick="toggle(4)">
+        <div class="task-num">4</div>
+        <div class="task-info">
+          <div class="task-name">AZ-900 study: Microsoft Learn cloud concepts modules</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>4h</span>
+            <span class="tbadge tb-learn">Learn</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,4)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-4"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-4">
+        
+      <div class="section-lbl">Go to Microsoft Learn and find the AZ-900 learning path</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to <strong>learn.microsoft.com</strong> and search 'AZ-900'. Click 'Microsoft Azure Fundamentals' — it shows a learning path with multiple modules. This is the official Microsoft exam prep material and is completely free.</div></div><div class="step"><div class="snum">2</div><div class="stxt">You will work through the first learning path: <strong>'Describe cloud concepts'</strong>. It has three modules. Allocate roughly 45–50 minutes per module including the sandbox exercises.</div></div>
+    
+      <div class="section-lbl">Module 1: Describe cloud computing (45–50 min)</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Work through every section. Do not skip the 'Knowledge check' questions at the end of each unit — these are mini exam questions.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Key things to understand: the shared responsibility model, the definition of cloud computing, and the difference between private, public and hybrid cloud.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>The shared responsibility model:</strong> In IaaS (like a VM), Microsoft handles the physical hardware and you handle everything else. In PaaS, Microsoft handles hardware AND the OS. In SaaS, Microsoft handles everything. This is on the exam and in security interviews.</div></div>
+    
+      <div class="section-lbl">Module 2: Describe the benefits of using cloud services (45–50 min)</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Key concepts: high availability, scalability, reliability, security, governance, manageability.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>High availability:</strong> Measured as a percentage — 99.9% means roughly 8.7 hours downtime per year. Azure publishes SLAs for every service.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Scalability:</strong> Vertical scaling = making one machine bigger. Horizontal scaling = adding more machines. Cloud makes both possible in minutes.</div></div><div class="step"><div class="snum">4</div><div class="stxt"><strong>Elasticity:</strong> Automatically scaling up when demand spikes, then back down. A retail site using 5 servers normally but 50 on Black Friday — that's elasticity. You only pay for what you use.</div></div><div class="step"><div class="snum">5</div><div class="stxt">Do all sandbox exercises.</div></div>
+    
+      <div class="section-lbl">Module 3: Describe cloud service types (45–50 min)</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">This is the IaaS / PaaS / SaaS module in full. Read carefully and complete all exercises.</div></div><div class="step"><div class="snum">2</div><div class="stxt">After completing it, write your own table from memory with three columns: IaaS, PaaS, SaaS. For each: the definition, a real Azure example, who manages what, and when you'd use it.</div></div>
+    
+      <div class="section-lbl">John Savill reinforcement (30 min)</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Watch John Savill's AZ-900 episodes 2 and 3 on YouTube. He covers the same content differently, which reinforces understanding. Add any clearer explanations to your notes.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>Under the shared responsibility model, if you create a VM on Azure, who is responsible for patching the operating system?</li><li>A startup needs their website to handle 10x more traffic during a launch then scale back down. What cloud benefit describes this?</li><li>What is the difference between vertical and horizontal scaling? Give an example of each.</li></ul></div>
+        <div class="note info">Do not rush through Microsoft Learn to 'get through it'. If a concept is unclear, search YouTube for a short explanation before continuing. Understanding 80% deeply is better than understanding 100% shallowly.</div>
+      </div>
+    </div><div class="task" id="task-5">
+      <div class="task-hdr" onclick="toggle(5)">
+        <div class="task-num">5</div>
+        <div class="task-info">
+          <div class="task-name">Deploy your first virtual machine — hands-on project</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>4.5h</span>
+            <span class="tbadge tb-hands">Hands-on</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,5)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-5"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-5">
+        
+      <div class="section-lbl">Watch the tutorial first — do not skip this</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Before touching the Azure Portal, search YouTube for <code>Azure virtual machine tutorial beginner 2024 Microsoft</code>. Watch the whole thing first without doing anything, then go back and follow along step by step. This two-pass approach prevents confusion mid-way through.</div></div>
+    
+      <div class="section-lbl">Create your virtual machine step by step</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Log in to <strong>portal.azure.com</strong> and click '+ Create a resource'.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Search <strong>Virtual Machine</strong> and click Create.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Basics tab:</strong> Subscription — your free subscription. Resource Group — <code>rg-learning-week1</code>. VM name: <code>vm-week1-learning</code>. Region: UK South. Image: <strong>Windows Server 2022 Datacenter</strong>. Size: click 'See all sizes', search <code>B1s</code> — it is free tier eligible.</div></div><div class="step"><div class="snum">4</div><div class="stxt"><strong>Administrator account:</strong> Create a username (e.g. <code>azureadmin</code>) and a strong password. Write these down. Do not use a password you use elsewhere.</div></div><div class="step"><div class="snum">5</div><div class="stxt"><strong>Inbound port rules:</strong> Select 'Allow selected ports' and tick <strong>RDP (3389)</strong>. This is the port used by Remote Desktop — how you connect to the VM from your laptop.</div></div><div class="step"><div class="snum">6</div><div class="stxt">Leave all other tabs as default. Click <strong>Review + Create</strong>, then <strong>Create</strong>. Deployment takes 2–3 minutes.</div></div>
+    
+      <div class="section-lbl">Connect to your VM using Remote Desktop</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Once deployed, click 'Go to resource'. On the VM overview page, click <strong>Connect</strong> at the top, then <strong>Download RDP file</strong>.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Open the RDP file. On Windows it opens automatically — click Connect, enter your username and password. On Mac, install <strong>Microsoft Remote Desktop</strong> from the App Store first.</div></div><div class="step"><div class="snum">3</div><div class="stxt">You are now logged in to a computer in a Microsoft data centre in London. Open the Start menu. Open a browser. You're using the internet from inside a cloud server. This is what cloud computing physically feels like.</div></div><div class="step"><div class="snum">4</div><div class="stxt">Spend 10 minutes exploring. Open Task Manager and see the CPU and memory — 1 CPU and 1GB RAM. This is a very small VM intentionally, because larger ones cost more.</div></div>
+    
+      <div class="section-lbl">Stop the VM and understand billing</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Close the Remote Desktop connection. Back in the Azure Portal, click <strong>Stop</strong>. When a VM is stopped (deallocated), you are not charged for compute.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Notice the VM status changes to 'Stopped (deallocated)'. Read the difference between 'Stopped' and 'Stopped (deallocated)' — only deallocated stops compute billing. This is a common exam question.</div></div>
+    
+      <div class="section-lbl">Document your project on GitHub</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Open <strong>GitHub Desktop</strong> and click 'Create New Repository'. Name it <code>azure-vm-project</code>, set it Public, tick 'Initialise with README'. Click Create, then 'Publish repository'.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Open VS Code. Open the <code>README.md</code> file and write your documentation. Your README must contain: <strong>What I built</strong>, <strong>Why I built it</strong>, <strong>Services used</strong>, <strong>Steps I followed</strong> (numbered list), <strong>What I learned</strong> (bullet points), <strong>Architecture diagram</strong> (add after next step).</div></div><div class="step"><div class="snum">3</div><div class="stxt">Write honestly — 'I learned that when you stop a VM in Azure there are two different stopped states and only one of them stops billing' is a perfect learning note. Real observations impress employers far more than generic summaries.</div></div>
+    
+      <div class="section-lbl">Draw and upload your architecture diagram</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to <strong>diagrams.net</strong>. Click 'Create New Diagram'. Search 'azure' in the shape library — find the Virtual Machine icon.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Draw: a box for 'Azure — UK South region', inside it a box for the resource group, inside that a box for the VM. Add a laptop icon outside with an arrow labelled 'RDP (port 3389)' pointing to the VM. Label everything.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Export as PNG: File → Export as → PNG. Save as <code>architecture-diagram.png</code>.</div></div><div class="step"><div class="snum">4</div><div class="stxt">In VS Code, drag the PNG into your project folder. In the README, add <code>![Architecture diagram](architecture-diagram.png)</code>.</div></div><div class="step"><div class="snum">5</div><div class="stxt">In GitHub Desktop, write commit message <code>Add VM project README and architecture diagram</code> → Commit to main → Push origin.</div></div>
+    
+      <div class="section-lbl">Delete your resources cleanly</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to portal.azure.com → Resource Groups → click <code>rg-learning-week1</code> → Delete resource group → type the name to confirm → Delete. Removes everything at once.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Check your Cost Management dashboard to confirm no unexpected charges. Always do this after your first few projects — make it a habit.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>What port does RDP use, and why did you have to open it in the network security group?</li><li>What is the difference between 'Stopped' and 'Stopped (deallocated)' in Azure, and why does it matter for billing?</li><li>If you delete a resource group, what happens to the resources inside it?</li><li>Look at your GitHub repo — does your README explain what you built clearly enough that a stranger could understand it?</li></ul></div>
+        <div class="note warn">This task will likely take longer than 4.5 hours on your first attempt. That is completely normal. If something goes wrong — which it will — Google the error message exactly. Learning to troubleshoot is a core cloud skill.</div>
+      </div>
+    </div><div class="task" id="task-6">
+      <div class="task-hdr" onclick="toggle(6)">
+        <div class="task-num">6</div>
+        <div class="task-info">
+          <div class="task-name">Networking fundamentals — the foundation of cloud</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>3h</span>
+            <span class="tbadge tb-learn">Learn</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,6)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-6"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-6">
+        
+      <div class="section-lbl">Why you're doing this now</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Networking knowledge underpins everything in cloud. Understanding IP addresses, subnets and ports is essential for AZ-900, mandatory for AZ-104, and tested in every cloud job interview. You already encountered it — RDP runs on port 3389 and you had to open that port. Now you'll understand why.</div></div>
+    
+      <div class="section-lbl">Watch these videos — take structured notes throughout</div>
+      <div class="step"><div class="snum">1</div><div class="stxt"><strong>Video 1 (25 min):</strong> Search YouTube for <code>Professor Messer IP addressing explained N10-009</code>. Covers IP addresses, public vs private, IPv4 vs IPv6.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>Video 2 (20 min):</strong> Search YouTube for <code>NetworkChuck subnetting is simple</code>. Subnetting is how you divide a network into sections — the same thing you'll do when building Azure Virtual Networks.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Video 3 (15 min):</strong> Search YouTube for <code>Professor Messer common ports N10-009</code>. The most important ports: HTTP 80, HTTPS 443, RDP 3389, SSH 22, DNS 53.</div></div>
+    
+      <div class="section-lbl">Core concepts to master</div>
+      <div class="step"><div class="snum">1</div><div class="stxt"><strong>What is an IP address?</strong> A unique number identifying a device on a network. Looks like four numbers separated by dots: <code>192.168.1.50</code>. Every device has one.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>Public vs private IP:</strong> Private IPs are used inside a network (your home Wi-Fi, an Azure VNet) — not reachable from the internet. Public IPs are globally unique and internet-reachable. Your VM had both.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>What is a subnet?</strong> A subdivision of a network. If a network is a block of flats, a subnet is a specific floor. In Azure, you'll create a 'web-servers subnet' and a 'database subnet' to keep things separated and secure.</div></div><div class="step"><div class="snum">4</div><div class="stxt"><strong>CIDR notation:</strong> A way of writing a range of IP addresses. <code>10.0.0.0/24</code> means a network starting at 10.0.0.0 with 256 possible addresses. Used constantly when creating Azure Virtual Networks.</div></div><div class="step"><div class="snum">5</div><div class="stxt"><strong>What is DNS?</strong> The internet's phonebook. Translates 'google.com' into an IP address your computer can connect to. Cloud architects configure DNS constantly.</div></div><div class="step"><div class="snum">6</div><div class="stxt"><strong>What is a port?</strong> A number identifying a specific type of traffic on a server. A network security group in Azure is a list of rules allowing or denying traffic based on ports — which is why you had to specifically allow port 3389.</div></div>
+    
+      <div class="section-lbl">Add a 'Networking concepts' page to your study notes</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Create a dedicated notes page. Write your own definitions for: IP address, public IP, private IP, subnet, CIDR notation, DNS, port, RDP, SSH, HTTP, HTTPS. Your own words for every single one.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>What is CIDR notation and what does /24 mean in plain English?</li><li>Why did your VM need a public IP address?</li><li>If you wanted to prevent anyone from connecting to a VM via RDP, what would you do in Azure?</li><li>What is DNS and why would a cloud architect need to configure it?</li></ul></div>
+        <div class="note green">Don't try to memorise port numbers by brute force. Use them — every time you create a network security rule in Azure, look up why that port is being used. Context makes numbers stick.</div>
+      </div>
+    </div><div class="task" id="task-7">
+      <div class="task-hdr" onclick="toggle(7)">
+        <div class="task-num">7</div>
+        <div class="task-info">
+          <div class="task-name">AZ-900 study: Azure services and sandbox labs</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>4h</span>
+            <span class="tbadge tb-learn">Learn</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,7)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-7"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-7">
+        
+      <div class="section-lbl">Continue through the AZ-900 learning path on Microsoft Learn</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">You're now on the second AZ-900 learning path: <strong>'Describe Azure architecture and services'</strong>. Work through the first three modules today.</div></div>
+    
+      <div class="section-lbl">Module: Describe Azure compute and networking services (70 min)</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Covers Virtual Machines, Azure App Service, Azure Functions, Azure Container Instances, and Azure Virtual Networks. You already have hands-on VM experience, so this will feel grounded.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>Azure App Service:</strong> A PaaS service for hosting web apps. You don't manage the underlying VM — just deploy your code and it runs.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Azure Functions:</strong> Serverless compute. Small pieces of code that run only when triggered. You only pay for the time it takes to run. No servers to manage.</div></div><div class="step"><div class="snum">4</div><div class="stxt"><strong>Azure Virtual Networks:</strong> This connects directly to your networking study in Task 6. Subnets, CIDR ranges, network security groups — all of it applies here.</div></div><div class="step"><div class="snum">5</div><div class="stxt">Complete the sandbox exercises — actually create a VNet and explore its settings.</div></div>
+    
+      <div class="section-lbl">Module: Describe Azure storage services (50 min)</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Covers Azure Blob Storage, Azure Files, Azure Disk Storage, and storage tiers.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>Blob Storage:</strong> Object storage for files of any type — documents, images, video, backups. Massively scalable and very cheap. You'll use this in the Cloud Resume Challenge.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Storage tiers:</strong> Hot (frequent access), Cool (infrequent), Cold, and Archive (cheapest). Companies save money by automatically moving old data to cheaper tiers. Common exam and interview topic.</div></div><div class="step"><div class="snum">4</div><div class="stxt"><strong>Redundancy options:</strong> LRS keeps 3 copies of data in one data centre. GRS keeps copies in two different regions. Understanding why a company would choose GRS over LRS is architectural thinking you're developing.</div></div>
+    
+      <div class="section-lbl">Module: Describe Azure identity, access and security (50 min)</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Identity and access management is a top topic in both exams and interviews.</div></div><div class="step"><div class="snum">2</div><div class="stxt"><strong>Azure Active Directory (Microsoft Entra ID):</strong> Stores user accounts, handles logins, enforces who can access what. Every company using Microsoft 365 already uses it.</div></div><div class="step"><div class="snum">3</div><div class="stxt"><strong>Azure RBAC:</strong> Controls who can do what in Azure. Instead of full admin access, you assign specific roles — like 'Virtual Machine Contributor'. This is the principle of least privilege: give people only the access they actually need.</div></div><div class="step"><div class="snum">4</div><div class="stxt">Complete all sandbox exercises.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>What is the difference between Azure VMs and Azure App Service? When would you choose one over the other?</li><li>What is Azure RBAC and what problem does it solve?</li><li>What is the difference between LRS and GRS storage redundancy, and when would a company need GRS?</li><li>What is 'serverless' and what Azure service is the example of it?</li></ul></div>
+        <div class="note info">RBAC and identity content might feel dry compared to deploying VMs, but it is genuinely one of the most tested topics in AZ-104 and discussed in cloud architect interviews. Give it full attention.</div>
+      </div>
+    </div><div class="task" id="task-8">
+      <div class="task-hdr" onclick="toggle(8)">
+        <div class="task-num">8</div>
+        <div class="task-info">
+          <div class="task-name">GitHub mastery and documentation practice</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>3h</span>
+            <span class="tbadge tb-hands">Hands-on</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,8)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-8"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-8">
+        
+      <div class="section-lbl">Complete GitHub Skills course</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">If you haven't finished it from Task 1, complete the <strong>'Introduction to GitHub'</strong> course at skills.github.com. It takes about 45 minutes.</div></div><div class="step"><div class="snum">2</div><div class="stxt">After completing it, look at the repository it created. Notice the structure: a README, folders, and a history of every change. This is what employers see when they look at your profile.</div></div>
+    
+      <div class="section-lbl">Learn Markdown properly</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to <strong>markdownguide.org/cheat-sheet</strong>. Markdown is the language you use to write READMEs — plain text with a few extra symbols. Spend 20 minutes reading and trying each syntax in VS Code.</div></div><div class="step"><div class="snum">2</div><div class="stxt">You will use most: <code># Heading 1</code>, <code>## Heading 2</code>, <code>**bold**</code>, <code>- bullet</code>, <code>1. numbered list</code>, <code>[link](https://url.com)</code>, <code>![image](image.png)</code>, <code>`inline code`</code>.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Rewrite your existing VM project README using proper Markdown formatting — add proper headings, bullet points, make sure the architecture diagram displays correctly.</div></div>
+    
+      <div class="section-lbl">Create your second repository: cloud learning notes</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">In GitHub Desktop, create a new repository called <code>cloud-learning-notes</code>. Set to Public, initialise with README.</div></div><div class="step"><div class="snum">2</div><div class="stxt">This is your public study journal. Create one Markdown file per topic: <code>01-what-is-cloud.md</code>, <code>02-azure-portal-notes.md</code>, <code>03-networking-fundamentals.md</code>.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Copy your best notes from Notion or Obsidian into these files. Format them properly with Markdown. Push to GitHub.</div></div><div class="step"><div class="snum">4</div><div class="stxt">This reinforces learning by making you write things up properly, and shows employers that you study seriously and document your work — a rare quality in junior candidates.</div></div>
+    
+      <div class="section-lbl">Polish your GitHub profile</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to your GitHub profile and click the pencil icon. Add a bio: 'Studying for AZ-900 and Network+. Working towards Azure Solutions Architect. Based in London.'</div></div><div class="step"><div class="snum">2</div><div class="stxt">Create a special repository named exactly the same as your GitHub username — this becomes your profile README displayed on your profile page. Write a short introduction: who you are, what you're studying, what certs you're working towards.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>Can you write a proper Markdown README from memory — headings, bullet points, bold text, an image, and a link?</li><li>Look at your VM project on GitHub. Does it look professional? Would a stranger understand what you built?</li><li>Do you have at least two public repositories on GitHub?</li></ul></div>
+        <div class="note green">Your GitHub profile is the most important technical portfolio tool you have. Treat every repository like it might be the thing that gets you hired — because it might be.</div>
+      </div>
+    </div><div class="task" id="task-9">
+      <div class="task-hdr" onclick="toggle(9)">
+        <div class="task-num">9</div>
+        <div class="task-info">
+          <div class="task-name">Week 1 review, quiz, and consolidation</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>4h</span>
+            <span class="tbadge tb-review">Review</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk" onclick="markDone(event,9)" title="Mark complete"></div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-9"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-9">
+        
+      <div class="section-lbl">Full review of all your notes</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Open your Notion or Obsidian study journal. Read every page you wrote this week from start to finish. Mark anything that still feels unclear.</div></div><div class="step"><div class="snum">2</div><div class="stxt">For every unclear concept, go back to the source — the Microsoft Learn module or YouTube video — and re-read or rewatch that specific section.</div></div>
+    
+      <div class="section-lbl">Take the official AZ-900 practice assessment</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Go to <strong>learn.microsoft.com</strong>, find the AZ-900 page, scroll down to find the free practice assessment. It has 50 questions in exam format. Take it now — before you've revised, to see your real baseline.</div></div><div class="step"><div class="snum">2</div><div class="stxt">For every wrong answer: read the explanation Microsoft provides, then go to the Microsoft Learn module that covers that topic and re-read that section. Do not just note the right answer — understand why it is right.</div></div><div class="step"><div class="snum">3</div><div class="stxt">If you score below 60%, that is completely normal for week 1. The point is to identify gaps, not score perfectly.</div></div>
+    
+      <div class="section-lbl">The Feynman test — explain it all out loud</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Sit somewhere quiet and talk through everything you learned this week as if explaining it to someone who knows nothing about tech.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Cover in order: what cloud computing is, the three service models (IaaS/PaaS/SaaS), Azure regions and availability zones, how Azure is organised (subscription → resource group → resource), what a VM is and how you connect to one, IP addresses and subnets, Azure RBAC.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Every time you hesitate or go blank, that's a gap. Go back to your notes and fill it.</div></div>
+    
+      <div class="section-lbl">Create a flashcard set for key terms</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Use <strong>Anki</strong> (apps.ankiweb.net — free) or Quizlet. Create flashcards for every technical term this week — term on the front, your own definition on the back.</div></div><div class="step"><div class="snum">2</div><div class="stxt">Suggested cards: cloud computing, IaaS, PaaS, SaaS, high availability, scalability, elasticity, region, availability zone, resource group, subscription, virtual machine, RDP, port, subnet, CIDR, DNS, Azure RBAC, Blob Storage, LRS vs GRS.</div></div><div class="step"><div class="snum">3</div><div class="stxt">Set Anki to review these cards daily for 10 minutes. Spaced repetition is the most scientifically proven method for long-term memorisation.</div></div>
+    
+      <div class="section-lbl">Plan week 2 and set your rhythm</div>
+      <div class="step"><div class="snum">1</div><div class="stxt">Week 2 should continue AZ-900 on Microsoft Learn (complete the management and governance learning path), begin Network+ study with Professor Messer, and do Project 2 — hosting a static website on Azure Blob Storage.</div></div><div class="step"><div class="snum">2</div><div class="stxt">The most important habit: study every session, write notes, push to GitHub. Employers can see when your last commit was. Consistent daily activity is more impressive than a burst of activity once a fortnight.</div></div>
+    
+        <div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul><li>Without looking at notes: what are the three levels of Azure organisation?</li><li>What is the shared responsibility model and how does it differ between IaaS and PaaS?</li><li>What does RBAC stand for and what problem does it solve?</li><li>You score 58% on your practice assessment. Is that a failure? Why or why not?</li></ul></div>
+        <div class="note green">A practice assessment score is information, not a verdict. Every wrong answer is a revision target. The people who pass AZ-900 are not the ones who knew it all from the start — they identified their gaps and filled them systematically.</div>
+      </div>
+    </div></div>
+</div>
+
+<script>
+const TASKS=[
+{id:1,name:"Set up all your accounts and tools",hrs:2,cat:"setup",catLabel:"Setup",steps:[
+{label:"Create your GitHub account",items:[
+"Go to <strong>github.com</strong> and click Sign Up. Use your real name or something professional as your username — this URL goes on your CV. E.g. <code>john-smith-cloud</code> or <code>jsmith-dev</code>.",
+"Verify your email address. Then go to your profile and add a short bio — something like 'Studying cloud certifications. Working towards Azure Solutions Architect.'",
+"Go to <strong>skills.github.com</strong> and start the 'Introduction to GitHub' course. It takes about 45 minutes and teaches you everything you need to know about repos, commits, and READMEs. Do this before anything else on GitHub."
+]},{label:"Create your Azure free account",items:[
+"Go to <strong>azure.microsoft.com/free</strong> and click 'Start free'. Sign in with a Microsoft account (or create one). You'll need a credit card for identity verification — you will not be charged for free tier services.",
+"Once inside, go to <strong>portal.azure.com</strong>. This is your main Azure workspace for the next 2 years. Spend 10 minutes clicking around every menu and icon — just get familiar with where things are.",
+"<strong>Set up a billing alert immediately:</strong> search 'Cost Management' in the top search bar → Budgets → Add → set amount to £5, configure it to email you at 80% and 100% of that amount. This protects you from accidental charges."
+]},{label:"Create your AWS free tier account",items:[
+"Go to <strong>aws.amazon.com/free</strong> and sign up. A credit card is needed for verification only.",
+"Once in, go to the top right, click your account name → Billing Dashboard → Budgets → Create a budget. Set a £5 monthly budget with email alerts. Then set your region to <strong>Europe (London) eu-west-2</strong>.",
+"Spend 5 minutes clicking around the AWS Management Console. Note how different it feels from Azure — same concept, different layout."
+]},{label:"Install your tools",items:[
+"Download and install <strong>VS Code</strong> from code.visualstudio.com — your text editor for notes, README files, and later Terraform config.",
+"Download and install <strong>GitHub Desktop</strong> from desktop.github.com — a visual app for uploading files to GitHub. Sign in with your GitHub account.",
+"Bookmark <strong>diagrams.net</strong> (draw.io) — browser-based, nothing to install. You'll draw architecture diagrams here.",
+"Download <strong>Notion</strong> or <strong>Obsidian</strong> — use it as your study journal. Create a page called 'Cloud Study Notes — Week 1'."
+]}
+],mastery:["Can you explain what a GitHub repository is in your own words?","Have you set a billing alert on both Azure and AWS?","Do you know what the Azure Portal URL is from memory?"],note:"Do not skip the billing alerts. Students occasionally forget to delete a running VM and get charged. Two minutes now saves potential headaches later.",noteType:"warn"},
+
+{id:2,name:"Understand what cloud computing actually is",hrs:3,cat:"learn",catLabel:"Learn",steps:[
+{label:"Watch these three videos — in order, take notes on every one",items:[
+"<strong>Video 1 (20 min):</strong> Search YouTube for <code>NetworkChuck what is cloud computing</code>. He uses relatable analogies and is very beginner-friendly. Pause whenever something is unclear and write it in your notes before continuing.",
+"<strong>Video 2 (35 min):</strong> Search YouTube for <code>John Savill AZ-900 episode 1 cloud computing</code>. He is the best Azure educator on the internet. Take structured notes under these headings: What is cloud, Why use it, Key terms.",
+"<strong>Video 3 (8 min):</strong> Search YouTube for <code>IaaS PaaS SaaS explained simply</code> — watch the Fireship or Simplilearn version. This covers the three cloud service models that come up constantly in both the exam and job interviews."
+]},{label:"Study these core concepts until you can explain each without notes",items:[
+"<strong>What is a data centre?</strong> A massive building full of physical servers owned by Microsoft or Amazon. When you 'use the cloud', you are renting computers inside these buildings. Microsoft has data centres in London, Dublin, Amsterdam and many more.",
+"<strong>What is a region?</strong> A geographic area containing one or more data centres. 'UK South' is Azure's London region. Choosing UK South means your data lives in London — important for UK GDPR compliance.",
+"<strong>What is an availability zone?</strong> A separate building within a region. If one building has a power cut, the others stay up. Spreading resources across zones keeps them running — this is 'high availability'.",
+"<strong>IaaS:</strong> You rent raw hardware — VMs, storage, networks. You manage everything on top. Like renting an empty flat and furnishing it yourself.",
+"<strong>PaaS:</strong> You rent a managed platform to run your app on. Microsoft manages the infrastructure. Like renting a furnished flat.",
+"<strong>SaaS:</strong> You use software that lives entirely in the cloud. Microsoft 365 is SaaS. You manage nothing.",
+"<strong>CapEx vs OpEx:</strong> Before cloud, companies bought physical servers (big upfront cost = CapEx). Cloud is OpEx — pay monthly for what you use. This is why companies moved to cloud en masse."
+]},{label:"Write a one-page summary in your notes app",items:[
+"Write a plain-English summary of everything above as if explaining it to a friend who knows nothing about tech. This is the Feynman method — the most effective learning technique that exists.",
+"Include your own definitions for: cloud, region, availability zone, IaaS, PaaS, SaaS, CapEx, OpEx. Use your own words, not copied definitions."
+]}
+],mastery:["Can you explain the difference between IaaS, PaaS and SaaS with a real-world analogy?","If a company says they want their data to stay in the UK for legal reasons, what Azure setting does that relate to?","Why did businesses move from buying physical servers to using cloud services?"],note:"The Feynman summary is not optional. It is the single most effective study technique for retaining information. Every concept you struggle to explain needs more time before you move on.",noteType:"green"},
+
+{id:3,name:"Explore the Azure Portal in depth",hrs:2.5,cat:"hands",catLabel:"Hands-on",steps:[
+{label:"Watch the Azure Portal orientation video",items:[
+"Search YouTube for <code>Azure Portal tutorial beginner 2024</code>. Watch the Microsoft Azure official channel version (15–20 minutes). Follow along on your own portal as you watch — actually click the things they click."
+]},{label:"Understand Azure's three-level structure",items:[
+"Azure organises everything into three levels. You must understand all three — they appear constantly in AZ-104 and in real jobs.",
+"<strong>Level 1 — Subscription:</strong> Your billing account. Think of it like a bank account for Azure spending. Everything you create lives inside a subscription.",
+"<strong>Level 2 — Resource Group:</strong> A container that groups related resources together — like a folder. Key rule: when you delete a resource group, everything inside gets deleted too. This is how you clean up after a project.",
+"<strong>Level 3 — Resource:</strong> The actual thing you created — a VM, a storage account, a network.",
+"In the Azure Portal, click 'Resource groups' → '+ Create'. Name it <code>rg-learning-week1</code>, choose 'UK South', click Create. You now have an empty resource group for your first project."
+]},{label:"Explore every section of the portal",items:[
+"In the left sidebar, click each of these and spend 2 minutes reading: <strong>Virtual Machines, Storage accounts, Virtual networks, Azure Active Directory, Monitor, Cost Management.</strong> Don't create anything — just note what each service does.",
+"Use the <strong>search bar at the top</strong> to search 'Virtual Machine'. This is the fastest navigation method — professionals use it constantly.",
+"Click the <strong>question mark icon</strong> top right and explore the 'Quickstart Center' — it has structured beginner walkthroughs.",
+"Click <strong>Cloud Shell</strong> (terminal icon, top right). This is a browser-based command line connected directly to your Azure account. You won't need it yet, but know it's there."
+]},{label:"Write portal notes",items:[
+"Write down: what a subscription is, what a resource group is, what a resource is, and why the region 'UK South' matters specifically. Add a sketch of the three-level hierarchy."
+]}
+],mastery:["What is the difference between a resource group and a subscription?","If you want to delete every resource from a project at once, what is the fastest way to do it in Azure?","What region should you almost always choose for UK-based projects and why?"],note:"You now have the resource group 'rg-learning-week1' in your Azure account. You will use this in Task 5 when you deploy your first VM.",noteType:"green"},
+
+{id:4,name:"AZ-900 study: Microsoft Learn cloud concepts modules",hrs:4,cat:"learn",catLabel:"Learn",steps:[
+{label:"Go to Microsoft Learn and find the AZ-900 learning path",items:[
+"Go to <strong>learn.microsoft.com</strong> and search 'AZ-900'. Click 'Microsoft Azure Fundamentals' — it shows a learning path with multiple modules. This is the official Microsoft exam prep material and is completely free.",
+"You will work through the first learning path: <strong>'Describe cloud concepts'</strong>. It has three modules. Allocate roughly 45–50 minutes per module including the sandbox exercises."
+]},{label:"Module 1: Describe cloud computing (45–50 min)",items:[
+"Work through every section. Do not skip the 'Knowledge check' questions at the end of each unit — these are mini exam questions.",
+"Key things to understand: the shared responsibility model, the definition of cloud computing, and the difference between private, public and hybrid cloud.",
+"<strong>The shared responsibility model:</strong> In IaaS (like a VM), Microsoft handles the physical hardware and you handle everything else. In PaaS, Microsoft handles hardware AND the OS. In SaaS, Microsoft handles everything. This is on the exam and in security interviews."
+]},{label:"Module 2: Describe the benefits of using cloud services (45–50 min)",items:[
+"Key concepts: high availability, scalability, reliability, security, governance, manageability.",
+"<strong>High availability:</strong> Measured as a percentage — 99.9% means roughly 8.7 hours downtime per year. Azure publishes SLAs for every service.",
+"<strong>Scalability:</strong> Vertical scaling = making one machine bigger. Horizontal scaling = adding more machines. Cloud makes both possible in minutes.",
+"<strong>Elasticity:</strong> Automatically scaling up when demand spikes, then back down. A retail site using 5 servers normally but 50 on Black Friday — that's elasticity. You only pay for what you use.",
+"Do all sandbox exercises."
+]},{label:"Module 3: Describe cloud service types (45–50 min)",items:[
+"This is the IaaS / PaaS / SaaS module in full. Read carefully and complete all exercises.",
+"After completing it, write your own table from memory with three columns: IaaS, PaaS, SaaS. For each: the definition, a real Azure example, who manages what, and when you'd use it."
+]},{label:"John Savill reinforcement (30 min)",items:[
+"Watch John Savill's AZ-900 episodes 2 and 3 on YouTube. He covers the same content differently, which reinforces understanding. Add any clearer explanations to your notes."
+]}
+],mastery:["Under the shared responsibility model, if you create a VM on Azure, who is responsible for patching the operating system?","A startup needs their website to handle 10x more traffic during a launch then scale back down. What cloud benefit describes this?","What is the difference between vertical and horizontal scaling? Give an example of each."],note:"Do not rush through Microsoft Learn to 'get through it'. If a concept is unclear, search YouTube for a short explanation before continuing. Understanding 80% deeply is better than understanding 100% shallowly.",noteType:"info"},
+
+{id:5,name:"Deploy your first virtual machine — hands-on project",hrs:4.5,cat:"hands",catLabel:"Hands-on",steps:[
+{label:"Watch the tutorial first — do not skip this",items:[
+"Before touching the Azure Portal, search YouTube for <code>Azure virtual machine tutorial beginner 2024 Microsoft</code>. Watch the whole thing first without doing anything, then go back and follow along step by step. This two-pass approach prevents confusion mid-way through."
+]},{label:"Create your virtual machine step by step",items:[
+"Log in to <strong>portal.azure.com</strong> and click '+ Create a resource'.",
+"Search <strong>Virtual Machine</strong> and click Create.",
+"<strong>Basics tab:</strong> Subscription — your free subscription. Resource Group — <code>rg-learning-week1</code>. VM name: <code>vm-week1-learning</code>. Region: UK South. Image: <strong>Windows Server 2022 Datacenter</strong>. Size: click 'See all sizes', search <code>B1s</code> — it is free tier eligible.",
+"<strong>Administrator account:</strong> Create a username (e.g. <code>azureadmin</code>) and a strong password. Write these down. Do not use a password you use elsewhere.",
+"<strong>Inbound port rules:</strong> Select 'Allow selected ports' and tick <strong>RDP (3389)</strong>. This is the port used by Remote Desktop — how you connect to the VM from your laptop.",
+"Leave all other tabs as default. Click <strong>Review + Create</strong>, then <strong>Create</strong>. Deployment takes 2–3 minutes."
+]},{label:"Connect to your VM using Remote Desktop",items:[
+"Once deployed, click 'Go to resource'. On the VM overview page, click <strong>Connect</strong> at the top, then <strong>Download RDP file</strong>.",
+"Open the RDP file. On Windows it opens automatically — click Connect, enter your username and password. On Mac, install <strong>Microsoft Remote Desktop</strong> from the App Store first.",
+"You are now logged in to a computer in a Microsoft data centre in London. Open the Start menu. Open a browser. You're using the internet from inside a cloud server. This is what cloud computing physically feels like.",
+"Spend 10 minutes exploring. Open Task Manager and see the CPU and memory — 1 CPU and 1GB RAM. This is a very small VM intentionally, because larger ones cost more."
+]},{label:"Stop the VM and understand billing",items:[
+"Close the Remote Desktop connection. Back in the Azure Portal, click <strong>Stop</strong>. When a VM is stopped (deallocated), you are not charged for compute.",
+"Notice the VM status changes to 'Stopped (deallocated)'. Read the difference between 'Stopped' and 'Stopped (deallocated)' — only deallocated stops compute billing. This is a common exam question."
+]},{label:"Document your project on GitHub",items:[
+"Open <strong>GitHub Desktop</strong> and click 'Create New Repository'. Name it <code>azure-vm-project</code>, set it Public, tick 'Initialise with README'. Click Create, then 'Publish repository'.",
+"Open VS Code. Open the <code>README.md</code> file and write your documentation. Your README must contain: <strong>What I built</strong>, <strong>Why I built it</strong>, <strong>Services used</strong>, <strong>Steps I followed</strong> (numbered list), <strong>What I learned</strong> (bullet points), <strong>Architecture diagram</strong> (add after next step).",
+"Write honestly — 'I learned that when you stop a VM in Azure there are two different stopped states and only one of them stops billing' is a perfect learning note. Real observations impress employers far more than generic summaries."
+]},{label:"Draw and upload your architecture diagram",items:[
+"Go to <strong>diagrams.net</strong>. Click 'Create New Diagram'. Search 'azure' in the shape library — find the Virtual Machine icon.",
+"Draw: a box for 'Azure — UK South region', inside it a box for the resource group, inside that a box for the VM. Add a laptop icon outside with an arrow labelled 'RDP (port 3389)' pointing to the VM. Label everything.",
+"Export as PNG: File → Export as → PNG. Save as <code>architecture-diagram.png</code>.",
+"In VS Code, drag the PNG into your project folder. In the README, add <code>![Architecture diagram](architecture-diagram.png)</code>.",
+"In GitHub Desktop, write commit message <code>Add VM project README and architecture diagram</code> → Commit to main → Push origin."
+]},{label:"Delete your resources cleanly",items:[
+"Go to portal.azure.com → Resource Groups → click <code>rg-learning-week1</code> → Delete resource group → type the name to confirm → Delete. Removes everything at once.",
+"Check your Cost Management dashboard to confirm no unexpected charges. Always do this after your first few projects — make it a habit."
+]}
+],mastery:["What port does RDP use, and why did you have to open it in the network security group?","What is the difference between 'Stopped' and 'Stopped (deallocated)' in Azure, and why does it matter for billing?","If you delete a resource group, what happens to the resources inside it?","Look at your GitHub repo — does your README explain what you built clearly enough that a stranger could understand it?"],note:"This task will likely take longer than 4.5 hours on your first attempt. That is completely normal. If something goes wrong — which it will — Google the error message exactly. Learning to troubleshoot is a core cloud skill.",noteType:"warn"},
+
+{id:6,name:"Networking fundamentals — the foundation of cloud",hrs:3,cat:"learn",catLabel:"Learn",steps:[
+{label:"Why you're doing this now",items:[
+"Networking knowledge underpins everything in cloud. Understanding IP addresses, subnets and ports is essential for AZ-900, mandatory for AZ-104, and tested in every cloud job interview. You already encountered it — RDP runs on port 3389 and you had to open that port. Now you'll understand why."
+]},{label:"Watch these videos — take structured notes throughout",items:[
+"<strong>Video 1 (25 min):</strong> Search YouTube for <code>Professor Messer IP addressing explained N10-009</code>. Covers IP addresses, public vs private, IPv4 vs IPv6.",
+"<strong>Video 2 (20 min):</strong> Search YouTube for <code>NetworkChuck subnetting is simple</code>. Subnetting is how you divide a network into sections — the same thing you'll do when building Azure Virtual Networks.",
+"<strong>Video 3 (15 min):</strong> Search YouTube for <code>Professor Messer common ports N10-009</code>. The most important ports: HTTP 80, HTTPS 443, RDP 3389, SSH 22, DNS 53."
+]},{label:"Core concepts to master",items:[
+"<strong>What is an IP address?</strong> A unique number identifying a device on a network. Looks like four numbers separated by dots: <code>192.168.1.50</code>. Every device has one.",
+"<strong>Public vs private IP:</strong> Private IPs are used inside a network (your home Wi-Fi, an Azure VNet) — not reachable from the internet. Public IPs are globally unique and internet-reachable. Your VM had both.",
+"<strong>What is a subnet?</strong> A subdivision of a network. If a network is a block of flats, a subnet is a specific floor. In Azure, you'll create a 'web-servers subnet' and a 'database subnet' to keep things separated and secure.",
+"<strong>CIDR notation:</strong> A way of writing a range of IP addresses. <code>10.0.0.0/24</code> means a network starting at 10.0.0.0 with 256 possible addresses. Used constantly when creating Azure Virtual Networks.",
+"<strong>What is DNS?</strong> The internet's phonebook. Translates 'google.com' into an IP address your computer can connect to. Cloud architects configure DNS constantly.",
+"<strong>What is a port?</strong> A number identifying a specific type of traffic on a server. A network security group in Azure is a list of rules allowing or denying traffic based on ports — which is why you had to specifically allow port 3389."
+]},{label:"Add a 'Networking concepts' page to your study notes",items:[
+"Create a dedicated notes page. Write your own definitions for: IP address, public IP, private IP, subnet, CIDR notation, DNS, port, RDP, SSH, HTTP, HTTPS. Your own words for every single one."
+]}
+],mastery:["What is CIDR notation and what does /24 mean in plain English?","Why did your VM need a public IP address?","If you wanted to prevent anyone from connecting to a VM via RDP, what would you do in Azure?","What is DNS and why would a cloud architect need to configure it?"],note:"Don't try to memorise port numbers by brute force. Use them — every time you create a network security rule in Azure, look up why that port is being used. Context makes numbers stick.",noteType:"green"},
+
+{id:7,name:"AZ-900 study: Azure services and sandbox labs",hrs:4,cat:"learn",catLabel:"Learn",steps:[
+{label:"Continue through the AZ-900 learning path on Microsoft Learn",items:[
+"You're now on the second AZ-900 learning path: <strong>'Describe Azure architecture and services'</strong>. Work through the first three modules today."
+]},{label:"Module: Describe Azure compute and networking services (70 min)",items:[
+"Covers Virtual Machines, Azure App Service, Azure Functions, Azure Container Instances, and Azure Virtual Networks. You already have hands-on VM experience, so this will feel grounded.",
+"<strong>Azure App Service:</strong> A PaaS service for hosting web apps. You don't manage the underlying VM — just deploy your code and it runs.",
+"<strong>Azure Functions:</strong> Serverless compute. Small pieces of code that run only when triggered. You only pay for the time it takes to run. No servers to manage.",
+"<strong>Azure Virtual Networks:</strong> This connects directly to your networking study in Task 6. Subnets, CIDR ranges, network security groups — all of it applies here.",
+"Complete the sandbox exercises — actually create a VNet and explore its settings."
+]},{label:"Module: Describe Azure storage services (50 min)",items:[
+"Covers Azure Blob Storage, Azure Files, Azure Disk Storage, and storage tiers.",
+"<strong>Blob Storage:</strong> Object storage for files of any type — documents, images, video, backups. Massively scalable and very cheap. You'll use this in the Cloud Resume Challenge.",
+"<strong>Storage tiers:</strong> Hot (frequent access), Cool (infrequent), Cold, and Archive (cheapest). Companies save money by automatically moving old data to cheaper tiers. Common exam and interview topic.",
+"<strong>Redundancy options:</strong> LRS keeps 3 copies of data in one data centre. GRS keeps copies in two different regions. Understanding why a company would choose GRS over LRS is architectural thinking you're developing."
+]},{label:"Module: Describe Azure identity, access and security (50 min)",items:[
+"Identity and access management is a top topic in both exams and interviews.",
+"<strong>Azure Active Directory (Microsoft Entra ID):</strong> Stores user accounts, handles logins, enforces who can access what. Every company using Microsoft 365 already uses it.",
+"<strong>Azure RBAC:</strong> Controls who can do what in Azure. Instead of full admin access, you assign specific roles — like 'Virtual Machine Contributor'. This is the principle of least privilege: give people only the access they actually need.",
+"Complete all sandbox exercises."
+]}
+],mastery:["What is the difference between Azure VMs and Azure App Service? When would you choose one over the other?","What is Azure RBAC and what problem does it solve?","What is the difference between LRS and GRS storage redundancy, and when would a company need GRS?","What is 'serverless' and what Azure service is the example of it?"],note:"RBAC and identity content might feel dry compared to deploying VMs, but it is genuinely one of the most tested topics in AZ-104 and discussed in cloud architect interviews. Give it full attention.",noteType:"info"},
+
+{id:8,name:"GitHub mastery and documentation practice",hrs:3,cat:"hands",catLabel:"Hands-on",steps:[
+{label:"Complete GitHub Skills course",items:[
+"If you haven't finished it from Task 1, complete the <strong>'Introduction to GitHub'</strong> course at skills.github.com. It takes about 45 minutes.",
+"After completing it, look at the repository it created. Notice the structure: a README, folders, and a history of every change. This is what employers see when they look at your profile."
+]},{label:"Learn Markdown properly",items:[
+"Go to <strong>markdownguide.org/cheat-sheet</strong>. Markdown is the language you use to write READMEs — plain text with a few extra symbols. Spend 20 minutes reading and trying each syntax in VS Code.",
+"You will use most: <code># Heading 1</code>, <code>## Heading 2</code>, <code>**bold**</code>, <code>- bullet</code>, <code>1. numbered list</code>, <code>[link](https://url.com)</code>, <code>![image](image.png)</code>, <code>`inline code`</code>.",
+"Rewrite your existing VM project README using proper Markdown formatting — add proper headings, bullet points, make sure the architecture diagram displays correctly."
+]},{label:"Create your second repository: cloud learning notes",items:[
+"In GitHub Desktop, create a new repository called <code>cloud-learning-notes</code>. Set to Public, initialise with README.",
+"This is your public study journal. Create one Markdown file per topic: <code>01-what-is-cloud.md</code>, <code>02-azure-portal-notes.md</code>, <code>03-networking-fundamentals.md</code>.",
+"Copy your best notes from Notion or Obsidian into these files. Format them properly with Markdown. Push to GitHub.",
+"This reinforces learning by making you write things up properly, and shows employers that you study seriously and document your work — a rare quality in junior candidates."
+]},{label:"Polish your GitHub profile",items:[
+"Go to your GitHub profile and click the pencil icon. Add a bio: 'Studying for AZ-900 and Network+. Working towards Azure Solutions Architect. Based in London.'",
+"Create a special repository named exactly the same as your GitHub username — this becomes your profile README displayed on your profile page. Write a short introduction: who you are, what you're studying, what certs you're working towards."
+]}
+],mastery:["Can you write a proper Markdown README from memory — headings, bullet points, bold text, an image, and a link?","Look at your VM project on GitHub. Does it look professional? Would a stranger understand what you built?","Do you have at least two public repositories on GitHub?"],note:"Your GitHub profile is the most important technical portfolio tool you have. Treat every repository like it might be the thing that gets you hired — because it might be.",noteType:"green"},
+
+{id:9,name:"Week 1 review, quiz, and consolidation",hrs:4,cat:"review",catLabel:"Review",steps:[
+{label:"Full review of all your notes",items:[
+"Open your Notion or Obsidian study journal. Read every page you wrote this week from start to finish. Mark anything that still feels unclear.",
+"For every unclear concept, go back to the source — the Microsoft Learn module or YouTube video — and re-read or rewatch that specific section."
+]},{label:"Take the official AZ-900 practice assessment",items:[
+"Go to <strong>learn.microsoft.com</strong>, find the AZ-900 page, scroll down to find the free practice assessment. It has 50 questions in exam format. Take it now — before you've revised, to see your real baseline.",
+"For every wrong answer: read the explanation Microsoft provides, then go to the Microsoft Learn module that covers that topic and re-read that section. Do not just note the right answer — understand why it is right.",
+"If you score below 60%, that is completely normal for week 1. The point is to identify gaps, not score perfectly."
+]},{label:"The Feynman test — explain it all out loud",items:[
+"Sit somewhere quiet and talk through everything you learned this week as if explaining it to someone who knows nothing about tech.",
+"Cover in order: what cloud computing is, the three service models (IaaS/PaaS/SaaS), Azure regions and availability zones, how Azure is organised (subscription → resource group → resource), what a VM is and how you connect to one, IP addresses and subnets, Azure RBAC.",
+"Every time you hesitate or go blank, that's a gap. Go back to your notes and fill it."
+]},{label:"Create a flashcard set for key terms",items:[
+"Use <strong>Anki</strong> (apps.ankiweb.net — free) or Quizlet. Create flashcards for every technical term this week — term on the front, your own definition on the back.",
+"Suggested cards: cloud computing, IaaS, PaaS, SaaS, high availability, scalability, elasticity, region, availability zone, resource group, subscription, virtual machine, RDP, port, subnet, CIDR, DNS, Azure RBAC, Blob Storage, LRS vs GRS.",
+"Set Anki to review these cards daily for 10 minutes. Spaced repetition is the most scientifically proven method for long-term memorisation."
+]},{label:"Plan week 2 and set your rhythm",items:[
+"Week 2 should continue AZ-900 on Microsoft Learn (complete the management and governance learning path), begin Network+ study with Professor Messer, and do Project 2 — hosting a static website on Azure Blob Storage.",
+"The most important habit: study every session, write notes, push to GitHub. Employers can see when your last commit was. Consistent daily activity is more impressive than a burst of activity once a fortnight."
+]}
+],mastery:["Without looking at notes: what are the three levels of Azure organisation?","What is the shared responsibility model and how does it differ between IaaS and PaaS?","What does RBAC stand for and what problem does it solve?","You score 58% on your practice assessment. Is that a failure? Why or why not?"],note:"A practice assessment score is information, not a verdict. Every wrong answer is a revision target. The people who pass AZ-900 are not the ones who knew it all from the start — they identified their gaps and filled them systematically.",noteType:"green"}
+];
+
+const totalHrs=30;
+let done=new Set();
+
+function catClass(c){return{setup:'tb-setup',learn:'tb-learn',hands:'tb-hands',review:'tb-review'}[c]||'tb-learn';}
+
+function render(){
+  const el=document.getElementById('tasks');
+  el.innerHTML=TASKS.map(t=>{
+    const isDone=done.has(t.id);
+    const stepsHtml=t.steps.map(s=>`
+      <div class="section-lbl">${s.label}</div>
+      ${s.items.map((item,i)=>`<div class="step"><div class="snum">${i+1}</div><div class="stxt">${item}</div></div>`).join('')}
+    `).join('');
+    const masteryHtml=`<div class="mastery"><div class="mastery-title"><i class="ti ti-check" aria-hidden="true" style="font-size:13px"></i> Mastery check — can you answer these without notes?</div><ul>${t.mastery.map(m=>`<li>${m}</li>`).join('')}</ul></div>`;
+    const noteHtml=t.note?`<div class="note ${t.noteType==='warn'?'warn':t.noteType==='green'?'green':'info'}">${t.note}</div>`:'';
+    return`<div class="task${isDone?' done':''}" id="task-${t.id}">
+      <div class="task-hdr" onclick="toggle(${t.id})">
+        <div class="task-num">${t.id}</div>
+        <div class="task-info">
+          <div class="task-name">${t.name}</div>
+          <div class="task-meta">
+            <span class="tbadge tb-hrs"><i class="ti ti-clock" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:2px"></i>${t.hrs}h</span>
+            <span class="tbadge ${catClass(t.cat)}">${t.catLabel}</span>
+          </div>
+        </div>
+        <div class="task-right">
+          <div class="chk${isDone?' checked':''}" onclick="markDone(event,${t.id})" title="Mark complete">${isDone?'<i class="ti ti-check" aria-hidden="true"></i>':''}</div>
+          <i class="ti ti-chevron-down chevron" aria-hidden="true" id="chev-${t.id}"></i>
+        </div>
+      </div>
+      <div class="task-body" id="body-${t.id}">
+        ${stepsHtml}
+        ${masteryHtml}
+        ${noteHtml}
+      </div>
+    </div>`;
+  }).join('');
+  updateProgress();
+}
+
+function toggle(id){
+  const body=document.getElementById('body-'+id);
+  const chev=document.getElementById('chev-'+id);
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('.task-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.chevron').forEach(c=>c.classList.remove('open'));
+  if(!isOpen){body.classList.add('open');chev.classList.add('open');}
+}
+
+function markDone(e,id){
+  e.stopPropagation();
+  done.has(id)?done.delete(id):done.add(id);
+  render();
+}
+
+function updateProgress(){
+  const doneHrs=Array.from(done).reduce((s,id)=>{const t=TASKS.find(t=>t.id===id);return s+(t?t.hrs:0);},0);
+  const pct=Math.round((doneHrs/totalHrs)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=doneHrs+' / '+totalHrs+' hours completed';
+  document.getElementById('stat-done').textContent=done.size;
+  document.getElementById('stat-hrs').textContent=doneHrs+'h';
+  document.getElementById('stat-left').textContent=(totalHrs-doneHrs)+'h';
+  document.getElementById('stat-pct').textContent=pct+'%';
+}
+
+render();
+</script>
+
+
+</body></html>
